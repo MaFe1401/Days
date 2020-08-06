@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 
 import static java.lang.Integer.valueOf;
 
@@ -84,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+    }
+    public void randomButton(View view){
+        TextView date=findViewById(R.id.date);
+        date.setText(generateRandomDate());
     }
     public int getMonthValue(int orden) {
         int i = 0;
@@ -232,5 +238,17 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
 
+    }
+    public String generateRandomDate(){
+       boolean valid= false;
+       int day=0; int month=0; int year=0;
+       while (valid==false){
+            day=(int)(Math.random() * ((31 - 1) + 1)) + 1;
+            month=(int)(Math.random() * ((12 - 1) + 1)) + 1;
+            year=(int)(Math.random() * ((2399 - 1600) + 1)) + 1600;
+           valid=isItValid(day, month, year);
+       }
+        String date= day+"/"+month+"/"+year;
+       return date;
     }
 }
